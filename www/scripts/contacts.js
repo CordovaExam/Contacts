@@ -6,29 +6,39 @@ var Contacts = {
     // CreateContact
     CreateContact : function (data) {
 
-        var myContact = navigator.contacts.create({"displayName": data.displayName});
+        if(data.displayName.length < 1)
+            return false;
 
-            var name = new ContactName();
-            name.givenName = "Jane";
-            name.familyName = "Doe";
-            myContact.name = name;
+        var initData = {
+            'displayName': data.displayName,
+        };
 
+        var myContact = navigator.contacts.create(initData);
+        var name = new ContactName();
+        name.givenName = data.givenName;
+        name.familyName = data.familyName;
+        myContact.name = name;
+
+        if(data.email.length > 0) {
             var emails = [];
             emails[0] = new ContactField('work', data.email, false);
             myContact.emails = emails;
+        }
 
+        if(data.mobile.length > 0) {
+            var phoneNumbers = [];
+            phoneNumbers[0] = new ContactField('mobile', data.mobile, false); 
+            myContact.phoneNumbers = phoneNumbers; 
+        }
 
-            if(data.photoUrl.length > 0) {
-                var photos = [];
-                //photos[0] = new ContactField('url', data.photoUrl,true);
-                photos[0] = new ContactField('base64', data.photoUrl,true); 
+        if(data.photoUrl.length > 0) {
+            var photos = [];
+            //photos[0] = new ContactField('url', data.photoUrl,true);
+            photos[0] = new ContactField('base64', data.photoUrl, true); 
+            myContact.photos = photos; 
+        }
 
-                myContact.photos = photos; 
-
-                alert(myContact.photos[0].value);
-            }
-
-            myContact.save(onSuccessCallBack, onErrorCallBack);
+        myContact.save(onSuccessCallBack, onErrorCallBack);
 
 
         function onSuccessCallBack() {
@@ -38,6 +48,8 @@ var Contacts = {
         function onErrorCallBack(message) {
             alert('Failed because: ' + message);
         }
+
+        return true;
 
     },
     //////////////////////////////////////////////////
@@ -96,7 +108,7 @@ var Contacts = {
             var img = document.createElement('img');
             if (contact.photos && contact.photos.length > 0) {
                 contactPhoto = contact.photos[0].value;
-                alert(contactPhoto);
+                //alert(contactPhoto);
             }
             img.setAttribute('src',contactPhoto);
             var h2 = document.createElement('h2');
@@ -137,7 +149,7 @@ var Contacts = {
         //options.desiredFields = [navigator.contacts.fieldType.id];
         //options.hasPhoneNumber = true;
         var fields = [
-                navigator.contacts.fieldType.rawId,
+            navigator.contacts.fieldType.rawId,
         ];
 
         navigator.contacts.find(fields, contactfindSuccess, contactfindError, options);
@@ -147,12 +159,14 @@ var Contacts = {
                 alert('not found info');
                 return;
             }
+            alert(contact.length);
+            return;
             var contact = contacts[0];
             contact.remove(contactRemoveSuccess, contactRemoveError);
 
                 function contactRemoveSuccess(contact) {
                     alert("Contact Deleted");
-                    FindContacts();
+                    this.FindContacts();
                 }
 
                 function contactRemoveError(message) {

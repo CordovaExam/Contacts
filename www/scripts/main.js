@@ -45,21 +45,10 @@
         // The scope of 'this' is the event. In order to call the 'receivedEvent'
         // function, we must explicitly call 'app.receivedEvent(...);'
         onDeviceReady: function() {
-            //app.receivedEvent('deviceready');
+
             main.onInitial();
 
         },
-        // Update DOM on a Received Event
-        receivedEvent: function(id) {
-            var parentElement = document.getElementById(id);
-            var listeningElement = parentElement.querySelector('.listening');
-            var receivedElement = parentElement.querySelector('.received');
-
-            listeningElement.setAttribute('style', 'display:none;');
-            receivedElement.setAttribute('style', 'display:block;');
-
-            console.log('Received Event: ' + id);
-        }
     };
     app.initialize();
 
@@ -72,6 +61,7 @@
         onInitial : function() {
 
             main.switchForm(0);
+            resetInputFields();
 
             $("#tab-Add").click(function() {
                 main.switchForm(0);
@@ -88,23 +78,29 @@
 
             // open pick photos 
             $("#btn-photo").click(function() {
-                util.GetPictureFromPhotoLib();
+                util.GetPictureFrom(Camera.PictureSourceType.PHOTOLIBRARY);
+            });
+            $("#btn-camera").click(function() {
+                util.GetPictureFrom(Camera.PictureSourceType.CAMERA );
             });
 
             // add submit
             $("#btn-Add").click(function() {
                 var data = {
                     "displayName": document.getElementById("text-name").value,
+                    "mobile": document.getElementById("text-mobile").value,
                     "email": document.getElementById("text-email").value,
-                    "photoUrl": document.getElementById("img-photo").value,
+                    "photoUrl": document.getElementById("img-photo").src,
+                    "givenName" : document.getElementById("text-name").value,
+                    "familyName" : ""
                 };
                Contacts.CreateContact(data);
             });
 
             // delete contact
             $(this.btn_Delete_ok).click(function(){
-                var rawId = $(this.btn_Delete_ok).attr('val');
-                DeleteContact(rawId);
+                var rawId = document.getElementById("btn-DeleteOk").getAttribute('val');
+                Contacts.DeleteContact(rawId);
             });
 
         },
