@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' ws: 'unsafe-inline' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src *">
+        
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+        <!--link rel="stylesheet" type="text/css" href="css/index.css-->
+		<link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.5.min.css">
+        <link rel="stylesheet" type="text/css" href="css/custom.css">
+		<script src="js/functions.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery.mobile-1.4.5.min.js"></script>
+        <title>HelloTaco</title>
+    </head>
+    <body>
+        <!------------------------------------------------------------------------------>
+        <div data-role="page">
+
+            <div data-role="header">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a data-icon="grid" id="tab-Add" class="ui-btn-active">Add</a></li>
+                        <li><a data-icon="star" id="tab-Find">Find</a></li>
+                        <li><a data-icon="gear" id="tab-Pick">Pick</a></li>
+                    </ul>
+                </div><!-- /navbar -->
+            </div><!-- /header -->
+            
+            <div data-role="main" id="main-body" class="ui-content" style="padding:10px 10px" >
+               <!--<div id="title" class="" style="text-align:center;font-size:1.5em;">
+                    <p>Example of Contancts</p>
+                </div>-->
+                <div id="count-contacts"></div>
+                <div id="add-contacts" class="ui-corner-all custom-corners">
+                    <div class="ui-bar ui-bar-a">
+                        <h3>Contact Information</h3>
+                    </div>
+                    <div class="ui-body ui-body-a">
+                        <div class="ui-bar ui-bar-a" style="text-align:center;">
+                            <img id="img-photo" style="width:150px;height:150px;">
+                            <a href="#" class="ui-shadow ui-btn ui-cornet-all" id="btn-photo" value="">Photo</a>
+                        </div>
+                        <label for="text-name">Display Name :</label>
+                        <input type="text" name="text-name" id="text-name" value="">
+                        <label for="text-email">Email :</label>
+                        <input type="text" name="text-email" id="text-email" value="">
+                        <br>
+                        <a href="#" class="ui-shadow ui-btn ui-cornet-all" id="btn-Add">Submit</a>
+                    </div>
+                </div>
+
+                <div id="find-contacts" class="ui-corner-all custom-corners">
+                    <div class="ui-bar ui-bar-a">
+                        <h3 id="total-contacts">Total : 0</h3>
+                    </div>
+                    <ul id="find-list-body" data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true">
+
+                        <li><a href="#">
+                        <h2>Loading..</h2>
+                        <p>Wait for ..</p></a>
+                        </li>
+                    </ul> 
+                </div>
+            </div>
+            <div data-role="footer">
+                <h1>Footer Text</h1>
+            </div>
+
+        <!------------------------------------------------------------------------------>
+            <div data-role="popup" id="myPopupDialog" data-overlay-theme="b">
+                <div data-role="header">
+                <h1>Header Text</h1>
+                </div>
+
+                <div data-role="main" class="ui-content">
+                    <h2>Delete Contact Dialog!</h2>
+                    <p>Are you sure to delete it?</p>
+                    <div data-role="controlgroup" data-type="horizontal">
+                    <a href="#closePopup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-icon-back ui-btn-icon-left" data-rel="back">Go Back</a>
+                    <a id="btn-DeleteOk" href="#deleteContact" class="ui-btn" val='99'>Sure Delete</a>
+                    </div>
+                </div>
+
+                <div data-role="footer">
+                <h1>Footer Text</h1>
+                </div>
+            </div>
+            </div>
+         
+        </div>
+        <!------------------------------------------------------------------------------>
+
+        <script type="text/javascript" src="cordova.js"></script>
+        <!--script type="text/javascript" src="scripts/index.js"></script-->
+		<script type="text/javascript" src="scripts/utils.js"></script>
+        <script type="text/javascript" src="scripts/main.js"></script>
+        <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+
+    </body>
+</html>
