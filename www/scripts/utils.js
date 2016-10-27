@@ -23,6 +23,7 @@ function resetInputFields() {
     document.getElementById("text-name").value = '';
     document.getElementById("text-mobile").value = '';
     document.getElementById("text-email").value = '';
+    document.getElementById("img-photo").value = "";
     document.getElementById("img-photo").src = 'images/person_blank.png';
 }
 //////////////////////////////////////////////////
@@ -45,6 +46,7 @@ var util = {
             // imageData is either a base64 encoded string or a file URI
             // If it's base64:            
             var image = document.getElementById('img-photo');
+            image.value = 'ok';
             if(destType == Camera.DestinationType.FILE_URI) {
                 image.src = imageURL;
             }

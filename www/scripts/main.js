@@ -90,17 +90,21 @@
                     "displayName": document.getElementById("text-name").value,
                     "mobile": document.getElementById("text-mobile").value,
                     "email": document.getElementById("text-email").value,
-                    "photoUrl": document.getElementById("img-photo").src,
+                    "photoUrl": "",
                     "givenName" : document.getElementById("text-name").value,
                     "familyName" : ""
                 };
+                var img_view = document.getElementById("img-photo");
+                if(img_view.value.length > 0)
+                    data["photoUrl"] = document.getElementById("img-photo").src;
+                     
                Contacts.CreateContact(data);
             });
 
             // delete contact
             $(this.btn_Delete_ok).click(function(){
-                var rawId = document.getElementById("btn-DeleteOk").getAttribute('val');
-                Contacts.DeleteContact(rawId);
+                var uid = document.getElementById("btn-DeleteOk").getAttribute('val');
+                Contacts.DeleteContact(uid);
             });
 
         },

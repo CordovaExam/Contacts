@@ -31,7 +31,7 @@ var Contacts = {
             myContact.phoneNumbers = phoneNumbers; 
         }
 
-        if(data.photoUrl.length > 0) {
+        if(data.photoUrl.length > 0 && data.photoUrl != 'images/person_blank.png') {
             var photos = [];
             //photos[0] = new ContactField('url', data.photoUrl,true);
             photos[0] = new ContactField('base64', data.photoUrl, true); 
@@ -42,7 +42,8 @@ var Contacts = {
 
 
         function onSuccessCallBack() {
-            alert("Contact is saved!")
+            alert("Contact is saved!");
+            resetInputFields();
         }
 
         function onErrorCallBack(message) {
@@ -130,7 +131,7 @@ var Contacts = {
             objItem.appendChild(a);
             // link popup
             var va = document.createElement('a');
-            va.setAttribute('href','javascript:openDeletePopup("'+contact.rawId+'")');
+            va.setAttribute('href','javascript:openDeletePopup("'+contact.id+'")');
             va.setAttribute('data-rel','popup');
             va.setAttribute('data-position-to','window');
             va.setAttribute('data-transition','fade');
@@ -141,15 +142,15 @@ var Contacts = {
         }
     },
     //////////////////////////////////////////////////
-    // FindContacts
-    DeleteContact : function (rawId) {
+    // DeleteContact
+    DeleteContact : function (searchTerm) {
         var options = new ContactFindOptions();
-        options.filter = '1';
+        options.filter = searchTerm;
         options.multiple = false;
         //options.desiredFields = [navigator.contacts.fieldType.id];
         //options.hasPhoneNumber = true;
         var fields = [
-            navigator.contacts.fieldType.rawId,
+            navigator.contacts.fieldType.id,
         ];
 
         navigator.contacts.find(fields, contactfindSuccess, contactfindError, options);
@@ -159,19 +160,17 @@ var Contacts = {
                 alert('not found info');
                 return;
             }
-            alert(contact.length);
-            return;
             var contact = contacts[0];
             contact.remove(contactRemoveSuccess, contactRemoveError);
 
-                function contactRemoveSuccess(contact) {
-                    alert("Contact Deleted");
-                    this.FindContacts();
-                }
+            function contactRemoveSuccess(contact) {
+                alert("Contact Deleted");
+                Contacts.FindContacts();
+            }
 
-                function contactRemoveError(message) {
-                    alert('Failed because: ' + message);
-                }
+            function contactRemoveError(message) {
+                alert('Failed because: ' + message);
+            }
             
         }
         function contactfindError(message) {
