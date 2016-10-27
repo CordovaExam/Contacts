@@ -35,8 +35,8 @@ var util = {
         var destType = Camera.DestinationType.DATA_URL;
         navigator.camera.getPicture(onSuccess, onFail,  { 
             quality: 90,
-            targetWidth:80,
-            targetHeight:100,
+            targetWidth:150,
+            targetHeight:150,
             destinationType: destType,
             sourceType: srcType,
             cameraDirection : Camera.Direction.FRONT ,
