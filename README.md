@@ -8,13 +8,14 @@ install plugin
 Create Contacts inclue photos
 
 In android platform, If you want to handle with photos, you should update some source code in  android project src folder that file is ContactAccessorSdk5.java in org folder.
+in file : Platform/android/build/src/org/apache/cordova/contacts/ContactAccessorSdk5.java
 
         // add import lib
         import android.util.Base64;
         import android.util.Base64InputStream;
         import android.util.Log;
 
-// update getPathFromUri function to like below 
+update getPathFromUri function to like below 
 
         private InputStream getPathFromUri(String path) throws IOException {
 
@@ -93,4 +94,5 @@ example create contact
         function onErrorCallBack(message) {
             alert('Failed because: ' + message);
         }
+        return true;
     }
