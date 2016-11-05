@@ -63,6 +63,7 @@ var Contacts = {
         options.hasPhoneNumber = true;
         var fields = [
                 navigator.contacts.fieldType.displayName,
+                navigator.contacts.fieldType.phoneNumbers,
                 navigator.contacts.fieldType.emails,
                 navigator.contacts.fieldType.photos,
         ];
@@ -116,10 +117,10 @@ var Contacts = {
             h2.innerHTML = contact.displayName;
 
             var p = document.createElement('p');
-            if (contact.emails) {
-                for (var j = 0; j < contact.emails.length; j++)
-                    if (contact.emails[j].value) {
-                        p.innerHTML = contact.emails[j].value;
+            if (contact.phoneNumbers) {
+                for (var j = 0; j < contact.phoneNumbers.length; j++)
+                    if (contact.phoneNumbers[j].value) {
+                        p.innerHTML = contact.phoneNumbers[j].value;
                         break;
                     }
             }        

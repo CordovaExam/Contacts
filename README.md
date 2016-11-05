@@ -6,6 +6,8 @@ Create Contacts inclue photos
 In android platform, If you want to handle with photos, you should update some source code in  android project src folder that file is ContactAccessorSdk5.java in org folder.
 
 // add import lib
+import java.io.ByteArrayInputStream;
+
 import android.util.Base64;
 import android.util.Base64InputStream;
 import android.util.Log;
